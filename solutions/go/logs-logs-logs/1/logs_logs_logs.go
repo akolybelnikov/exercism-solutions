@@ -1,0 +1,42 @@
+package logs
+
+import "unicode/utf8"
+
+// Application identifies the application emitting the given log.
+func Application(log string) string {
+	var res = "default"
+    for _, char := range log {
+        if char == '❗' {
+            return "recommendation"
+        }
+        if char == '🔍' {
+            return "search"
+        }
+        if char == '☀' {
+            return "weather"
+        }
+    }
+
+    return res
+}
+
+// Replace replaces all occurrences of old with new, returning the modified log
+// to the caller.
+func Replace(log string, oldRune, newRune rune) string {
+	rs := []rune(log)
+    for i, r := range rs {
+        if r == oldRune {
+            rs[i] = newRune
+        }
+    }
+
+    return string(rs)
+}
+
+// WithinLimit determines whether or not the number of characters in log is
+// within the limit.
+func WithinLimit(log string, limit int) bool {
+	numberOfRunes := utf8.RuneCountInString(log)
+
+    return numberOfRunes <= limit
+}
