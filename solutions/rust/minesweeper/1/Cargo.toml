@@ -1,0 +1,11 @@
+[package]
+edition = "2021"
+name = "minesweeper"
+version = "1.1.0"
+
+[dev-dependencies]
+criterion = "0.5.1"
+
+[[bench]]
+name = "minesweeper"
+harness = false
